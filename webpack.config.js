@@ -15,7 +15,7 @@ module.exports = {
     // bundle the client for hot reloading
     // only- means to only hot reload for successful updates
 
-    './src/index.js',
+    './src/index.js'
     // the entry point of our app
   ],
 
@@ -38,7 +38,7 @@ module.exports = {
         use: [
           'babel-loader',
         ],
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
 			{
 				test: /\.pug$/,
@@ -47,7 +47,7 @@ module.exports = {
 					pretty: true
 				}
 			}
-    ],
+    ]
   },
 
   plugins: [
@@ -72,7 +72,7 @@ module.exports = {
     //historyApiFallback: true,
     // respond to 404s with index.html
 
-    hot: true,
+    hot: true
     // enable HMR on the server
-  },
-};
+  }
+}
