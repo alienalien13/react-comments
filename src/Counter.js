@@ -20,7 +20,7 @@ export default class Counter extends Component {
 
   render() {
     return <div>
-      <h2>Counter: {this.state.counter}</h2>
+      <h2>Counter{this.props.add}: {this.state.counter}</h2>
       <input type="text"/>
     </div>;
   }

@@ -1,6 +1,7 @@
 var path = require('path'),
   htmlWebpackPlugin = require('html-webpack-plugin'),
-  webpack = require('webpack');
+  webpack = require('webpack'),
+  ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   entry: [
@@ -46,7 +47,15 @@ module.exports = {
 				options:{
 					pretty: true
 				}
-			}
+			},
+			{
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          use: [
+            'css-loader'
+          ]
+        })
+      }
     ]
   },
 
@@ -62,7 +71,8 @@ module.exports = {
     new htmlWebpackPlugin({
 			name: 'index.html',
 			template: './src/main.pug'
-		})
+		}),
+		new ExtractTextPlugin('./Comments.css')
   ],
 
   devServer: {

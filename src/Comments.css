@@ -1,0 +1,16 @@
+.wrap {
+	border: 1px solid grey;
+}
+.news_author, .news_text {
+	padding: 1px;
+	font-size: 13px;
+}
+
+.news_author::first-letter {
+	font-size: 25px;
+	color: red;
+}
+.news_text::first-letter {
+	font-size: 25px;
+	color: blue;
+}
