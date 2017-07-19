@@ -8,27 +8,17 @@ var my_comments = [
 	{
 		id: 1,
 		author: 'Parad Nashashyn',
-		comment: 'Ipsum dolor sit amet, consectetur adipisicing elit. Omnis?'
+		comment: 'Excepturi unde dolorum numquam sit, saepe facere pariatur. Ipsum dolor sit amet, consectetur adipisicing elit. Omnis?'
 	},
 	{
 		id: 2,
 		author: 'Apolon Markus',
-		comment: 'Repellendus.'
+		comment: 'Error similique soluta sint neque perferendis provident illo culpa, ab veritatis nostrum? Dolor vero modi optio mollitia, eos magnam. Hic, eius, aut!'
 	},
 	{
 		id: 3,
-		author: 'Coco Pollo',
-		comment: 'Income isnt the goal.'
-	},
-	{
-		id: 4,
-		author: 'CC Catch',
-		comment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor vero modi optio mollitia, eos magnam. Hic, eius, aut!'
-	},
-	{
-		id: 5,
 		author: 'Mamay Popau',
-		comment: 'Paradox mia dell vito'
+		comment: 'Laboriosam quisquam quibusdam suscipit rem fugit soluta doloremque similique iure, voluptate, atque sit tempore reiciendis? Ea ducimus, dolore veritatis.'
 	}
 ]
 
@@ -49,38 +39,45 @@ export default class App extends Component{
 			author = authorInp.value,
 			comment = commentInp.value
 
-		function newComment(author, comment){
-			this.id = my_comments.length + 1;
-			this.author = author;
-			this.comment = comment;
+		if (author && comment){
+			function newComment(author, comment){
+				this.id = my_comments.length + 1;
+				this.author = author;
+				this.comment = comment;
+			}
+
+			var newComment = new newComment(author, comment)
+			my_comments.push(newComment)
+			
+			this.setState({
+				comments: my_comments
+			})
+			
+			document.getElementById("authorNameInput").value="";
+			document.getElementById("commentInput").value="";
 		}
 
-		var newComment = new newComment(author, comment)
-		my_comments.push(newComment)
 		
-		this.setState({
-			comments: my_comments
-		})
-		document.getElementById("authorNameInput").value="";
-		document.getElementById("commentInput").value="";
 	}
 	
 	render(){
 		return(
 			<Layout>
+
 				<div className="row">
-					<div className="col-md-1"></div>
-					<input placeholder="Your Name" className="col-md-5" id="authorNameInput" type="text"/>
+					<textarea placeholder="Your Comment" className="col-md-10 offset-md-1" id="commentInput"/>
+				</div>
+
+				<div className="row">
+					<input placeholder="Your Name" className="col-md-5 offset-md-1" id="authorNameInput" type="text"/>
 					<div className="col-md-5 addButtPar">
 						<Button bsStyle="primary" onClick={this.handleClick}>Add comment</Button>
 					</div>
 				</div>
-				<div className="row">
-					<div className="col-md-1"></div>
-					<textarea placeholder="Your Comment" className="col-md-10" id="commentInput"/>
-				</div>
+
 				<hr className="col-md-10" />
-				<Comments data={my_comments} />
+
+				<Comments data={my_comments}/>
 			</Layout>
 		);
 	}

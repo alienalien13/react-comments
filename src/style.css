@@ -15,9 +15,8 @@
 	margin: 0;
 }
 .btn-group{
-	width: 369px;
-	margin: 0 auto;
 	margin-bottom: 8px;
+	padding: 0;
 }
 .btn:first-of-type{
 	width: 100%;
@@ -42,3 +41,9 @@
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
+/* .col .col-md-10 .offset-md-1 .align-self-center .btn-group{
+	padding: 0;
+} */
+/* #root div div section div:nth-child(1) div{
+	padding: 0px;
+} */

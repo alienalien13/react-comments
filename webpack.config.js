@@ -1,9 +1,10 @@
-var path = require('path'),
+const path = require('path'),
   htmlWebpackPlugin = require('html-webpack-plugin'),
   webpack = require('webpack'),
-  ExtractTextPlugin = require('extract-text-webpack-plugin')
+  ExtractTextPlugin = require('extract-text-webpack-plugin'),
+  UglyJs = require('uglifyjs-webpack-plugin')
 
-module.exports = {
+const hot = {
   entry: [
     'react-hot-loader/patch',
     // activate HMR for React
@@ -55,30 +56,6 @@ module.exports = {
             'css-loader'
           ]
         })
-      },
-      { 
-        test: /\.png$/, 
-        loader: "url-loader?limit=100000" 
-      },
-      { 
-        test: /\.jpg$/, 
-        loader: "file-loader" 
-      },
-      {
-        test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, 
-        loader: 'url?limit=10000&mimetype=application/font-woff'
-      },
-      {
-        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, 
-        loader: 'url?limit=10000&mimetype=application/octet-stream'
-      },
-      {
-        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, 
-        loader: 'file'
-      },
-      {
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, 
-        loader: 'url?limit=10000&mimetype=image/svg+xml'
       }
     ]
   },
@@ -96,7 +73,13 @@ module.exports = {
 			name: 'index.html',
 			template: './src/main.pug'
 		}),
-		new ExtractTextPlugin('./style.css')
+    new ExtractTextPlugin('./style.css'),
+    new webpack.ProvidePlugin({ // inject ES5 modules as global vars
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
+      Tether: 'tether'
+    })
   ],
 
   devServer: {
@@ -108,5 +91,72 @@ module.exports = {
 
     hot: true
     // enable HMR on the server
+  }
+}
+
+const prod = {
+  entry: ['./src/index.js'],
+
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
+  },
+
+  module: {
+    rules: [
+      {
+        test: /\.jsx?$/,
+        use: [
+          'babel-loader',
+        ],
+        exclude: /node_modules/
+      },
+			{
+				test: /\.pug$/,
+				loader: 'pug-loader',
+				options:{
+					pretty: true
+				}
+			},
+			{
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          use: [
+            'css-loader',
+            'postcss-loader'
+          ]
+        })
+      }
+    ]
+  },
+
+  plugins: [
+    new htmlWebpackPlugin({
+			name: 'index.html',
+      template: './src/main.pug',
+      minify: {
+        collapseInlineTagWhitespace: true,
+        collapseWhitespace: true,
+        removeComments: true        
+      }
+		}),
+    new ExtractTextPlugin('./style.css'),
+    new UglyJs({
+      comments: false
+    }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
+      Tether: 'tether'
+    })
+  ]
+}
+
+module.exports = function(env){
+  if(env === 'development'){
+    return hot;
+  }else if(env === 'production'){
+    return prod;
   }
 }
