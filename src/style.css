@@ -1,0 +1,44 @@
+.wrap{
+	margin-top: 15px;
+}
+.comment-wrap{
+	border: 1px solid #dddddd;
+	border-radius: 5px;
+	background-color: #f3f8fe;
+	font-size: 1.1em;
+}
+.comment-row{
+	padding-top: 10px;
+}
+.comment-row hr{
+	line-height: 0;
+	margin: 0;
+}
+.btn-group{
+	width: 369px;
+	margin: 0 auto;
+	margin-bottom: 8px;
+}
+.btn:first-of-type{
+	width: 100%;
+}
+.btn{
+	border-radius: 0;
+}
+.addButtPar{
+	padding: 0;
+}
+.hrcom{
+	position: relative;
+	left: -15px;
+	width: calc(100% + 30px);
+	padding: 0;
+	margin: 0;
+}
+.comment-wrap .row:first-of-type{
+	background-color: #e3effd;
+}
+.comment{
+	padding-top: 5px;
+	padding-bottom: 5px;
+}

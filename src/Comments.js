@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Button, ButtonGroup } from 'react-bootstrap'
 
 export default class Comments extends Component{
 	
@@ -7,43 +8,75 @@ export default class Comments extends Component{
 		this.state = {dataShow: props.data};
 
 		this.handleSortByAuthor = this.handleSortByAuthor.bind(this);
-		this.handleSortByText = this.handleSortByText.bind(this);
+		this.handleSortByComment = this.handleSortByComment.bind(this);
+		this.handleSortReset = this.handleSortReset.bind(this);
 	}
 
 	handleSortByAuthor(e){
-		var lolo = this.props.data.sort(function(el1, el2){
+		var dataSorted = this.props.data.sort(function(el1, el2){
 			if (el1.author.toLowerCase() > el2.author.toLowerCase()) return 1;
 			if (el1.author.toLowerCase() < el2.author.toLowerCase()) return -1;
 		})
 		this.setState({
-			dataShow: lolo
+			dataShow: dataSorted
 		})
 	}
 
-	handleSortByText(e){
-		var lolo = this.props.data.sort(function(el1, el2){
-			if (el1.text.toLowerCase() > el2.text.toLowerCase()) return 1;
-			if (el1.text.toLowerCase() < el2.text.toLowerCase()) return -1;
+	handleSortByComment(e){
+		var dataSorted = this.props.data.sort(function(el1, el2){
+			if (el1.comment.toLowerCase() > el2.comment.toLowerCase()) return 1;
+			if (el1.comment.toLowerCase() < el2.comment.toLowerCase()) return -1;
 		})
 		this.setState({
-			dataShow: lolo
+			dataShow: dataSorted
+		})
+	}
+
+	handleSortReset(e){
+		var dataSorted = this.props.data.sort(function(el1, el2){
+			if (el1.id > el2.id) return 1;
+			if (el1.id < el2.id) return -1;
+		})
+		this.setState({
+			dataShow: dataSorted
 		})
 	}
 
 	render(){
-		//var data = this.props.data;
+		
 		var newsTemplate = this.state.dataShow.map(function (item, index) {
 			return (
-				<div className="wrap" key={index}>
-					<div className="news_author">{item.author}:</div>
-					<p className="news_text">{item.text}</p>
+				<div className="row comment-row" key={item.id}>
+					<div className="col-md-1"></div>
+					<div className="col-md-10 comment-wrap">
+						<div className="row">
+							<div className="col-md-5 author">{item.author}:</div>
+							<div className="col-md-4"></div>
+							<div className="col-md-3">Comment #{item.id}</div>
+						</div>
+						<hr className="hrcom"/>
+						<div className="row">
+							<div className="col-md-12 comment">{item.comment}</div>
+						</div>
+					</div>
 				</div>
 			)
 		})
-		return <div className="news">
-			<input type="button" value="Sort by Author" onClick={this.handleSortByAuthor}/>
-			<input type="button" value="Sort by Text" onClick={this.handleSortByText}/>
-			{newsTemplate}
-		</div>
+		return <section>
+			<div className="row">
+
+					<ButtonGroup>
+							<Button bsStyle="primary" onClick={this.handleSortByAuthor}>Sort by Author</Button>
+							<Button bsStyle="primary" onClick={this.handleSortReset}>Reset</Button>
+							<Button bsStyle="primary" onClick={this.handleSortByComment}>Sort by Comment</Button>
+					</ButtonGroup>
+
+			</div>
+			<div className="row">
+				<div className="col-md-12">
+					{newsTemplate}
+				</div>
+			</div>
+		</section>
 	}
 }

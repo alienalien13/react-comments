@@ -1,0 +1,31 @@
+.wrap{
+	margin-top: 15px;
+}
+.comment-wrap{
+	border: 1px solid #dddddd;
+	border-radius: 5px;
+	background-color: #f3f8fe;
+	font-size: 1.1em;
+}
+.comment-row{
+	padding-top: 5px;
+}
+.comment-row hr{
+	line-height: 0;
+	margin: 0;
+}
+.btn-group{
+	width: 369px;
+	margin: 0 auto;
+	margin-bottom: 12px;
+}
+.btn:first-of-type{
+	width: 100%;
+}
+.btn{
+	border-radius: 0;
+}
+.addButtPar{
+	padding: 0;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuL3N0eWxlLmNzcyIsInNvdXJjZVJvb3QiOiIifQ==*/

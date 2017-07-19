@@ -2,11 +2,11 @@ import React from 'react';
 
 export default function Layout({ children }) {
   return (
-    <div>
-      <input type="text"/>
-      <input type="text"/>
-      <input type="button" value="Add comment"/>
-      {children}
+    <div className="row">
+      <div className="col-md-3"></div>
+      <div className="col-md-6 wrap">
+        {children}
+      </div>
     </div>
   );
 }
