@@ -9,6 +9,7 @@
 		".gitignore": true,
 		"node_modules": true,
 		".vscode": true,
-		"yarn.lock": true
+		"yarn.lock": true,
+		"desktop.ini": true
 	}
 }
