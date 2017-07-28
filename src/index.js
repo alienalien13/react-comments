@@ -15,6 +15,6 @@ const render = (Component) => {
 
 render(App);
 
-if (module.hot) {
+if (module.hot) { //hot reloading
   module.hot.accept('./App', () => { render(App) })
 }

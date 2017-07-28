@@ -32,26 +32,27 @@ export default class App extends Component{
 		this.handleClick = this.handleClick.bind(this)
 	}
 
-	handleClick(){
+	handleClick(){ //adding comment method
 		var authorInp = document.getElementById('authorNameInput'),
 			commentInp = document.getElementById('commentInput'),
 			author = authorInp.value,
 			comment = commentInp.value
 
-		if (author && comment){
-			function newComment(author, comment){
+		if (author && comment){ //if values are not empty change state
+			function newComment(author, comment){ //constructor function for design new comment
 				this.id = my_comments.length + 1;
 				this.author = author;
 				this.comment = comment;
 			}
 
-			var newComment = new newComment(author, comment)
-			my_comments.push(newComment)
+			var newComment = new newComment(author, comment) //new comment
+			my_comments.push(newComment) //add new comment to comments array my_comments
 			
 			this.setState({
 				comments: my_comments
 			})
 			
+			//reset inputs
 			document.getElementById("authorNameInput").value="";
 			document.getElementById("commentInput").value="";
 		}
@@ -77,6 +78,7 @@ export default class App extends Component{
 				<hr className="col-md-10" />
 
 				<Comments data={my_comments}/>
+				
 			</Layout>
 		);
 	}

@@ -7,10 +7,10 @@ export default class Comments extends Component{
 		super(props);
 		this.state = {
 			dataShow: props.data,
-			sortAut: false,
-			sortComm: false,
-			faAut: "col-md-2",
-			faComm: "col-md-2"
+			sortAut: false, //authors sorting switch
+			sortComm: false, //comments sorting switch
+			faAut: "col-md-2", //sort marker font awesome icon. sorting by authors
+			faComm: "col-md-2" //sort marker font awesome icon. sorting by comments
 		};
 
 		this.handleSortByAuthor = this.handleSortByAuthor.bind(this);
@@ -20,7 +20,7 @@ export default class Comments extends Component{
 
 	handleSortByAuthor(e){
 
-		if(this.state.sortAut){
+		if(this.state.sortAut){ //sorting to reduce
 
 			let dataSorted = this.props.data.sort(function(el1, el2){
 				if (el1.author.toLowerCase() > el2.author.toLowerCase()) return -1;
@@ -34,7 +34,7 @@ export default class Comments extends Component{
 				faComm: "col-md-2"
 			})
 
-		}else{
+		}else{ //sorting to increase
 
 			let dataSorted = this.props.data.sort(function(el1, el2){
 				if (el1.author.toLowerCase() > el2.author.toLowerCase()) return 1;
@@ -51,7 +51,7 @@ export default class Comments extends Component{
 		}
 	}
 
-	handleSortByComment(e){
+	handleSortByComment(e){ //sorting to reduce
 
 		if(this.state.sortComm){
 
@@ -67,7 +67,7 @@ export default class Comments extends Component{
 				faComm: "col-md-2 fa fa-angle-double-up"
 			})
 
-		}else{
+		}else{ //sorting to increase
 
 			let dataSorted = this.props.data.sort(function(el1, el2){
 				if (el1.comment.toLowerCase() > el2.comment.toLowerCase()) return 1;
@@ -122,6 +122,7 @@ export default class Comments extends Component{
 			)
 		})
 		return <section>
+
 			<div className="row">
 
 				<ButtonGroup className="col col-md-10 offset-md-1 align-self-center">
@@ -140,7 +141,6 @@ export default class Comments extends Component{
 							<div className="col-md-10">Sort by Comment</div>
 							<div className={this.state.faComm}></div>
 						</div>
-
 					</Button>
 
 				</ButtonGroup>
@@ -151,6 +151,7 @@ export default class Comments extends Component{
 					{newsTemplate}
 				</div>
 			</div>
+
 		</section>
 	}
 }
